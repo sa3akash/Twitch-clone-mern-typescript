@@ -21,8 +21,20 @@ class Config {
     return bunyan.createLogger({
       name: name,
       level: "debug",
+      // streams: [
+      //   {
+      //     level: "error",
+      //     stream: new BunyanMongooseStream(),
+      //   },
+      // ],
     });
   }
 }
 
 export const config: Config = new Config();
+
+// class BunyanMongooseStream {
+//   write(record: any) {
+//     ErrorLog.create({ data: JSON.parse(record) })
+//   }
+// }
