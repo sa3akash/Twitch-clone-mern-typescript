@@ -10,6 +10,7 @@ import { config } from "@/config";
 import Logger from "bunyan";
 import { errorHandler } from "@/middlewares/globalErrorHandler";
 import "express-async-errors";
+import routes from "@/routes";
 
 export class SetupServer {
   private app: Application;
@@ -31,7 +32,7 @@ export class SetupServer {
   private securityMiddleware(app: Application): void {
     app.use(
       cors({
-        origin: ["*"],
+        origin: ["*","http://localhost:5173"],
         credentials: true,
         optionsSuccessStatus: 200,
       })
@@ -56,7 +57,7 @@ export class SetupServer {
   }
 
   private routesMiddleware(app: Application): void {
-    // mainRoute(app);
+    routes(app);
   }
 
   private globalErrorHandler(app: Application): void {
