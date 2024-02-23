@@ -10,7 +10,7 @@ type UserType = {
 
 interface IAuthData {
   user: UserType | null;
-  setUser: (agr: UserType) => void;
+  setUser: (agr: UserType | null) => void;
 }
 
 export const useAuth = create(

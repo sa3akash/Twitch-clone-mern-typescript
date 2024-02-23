@@ -18,8 +18,7 @@ const Register: React.FC<Props> = ({ setIsLogin }) => {
     email: "",
   });
 
-  const setUser = useAuth((state)=>state.setUser);
-
+  const setUser = useAuth((state) => state.setUser);
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -42,7 +41,7 @@ const Register: React.FC<Props> = ({ setIsLogin }) => {
           email: "",
           password: "",
         });
-        setUser(data?.data)
+        setUser(data?.data);
         setSuccess(data.message);
         setTimeout(() => {
           setSuccess("");

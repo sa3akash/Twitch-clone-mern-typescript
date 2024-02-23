@@ -35,6 +35,7 @@ class Api {
   public login(data: ILogin) {
     return this.apiCall.post("/login", data);
   }
+  
   public register(data: IRegister) {
     return this.apiCall.post("/register", data,);
   }
