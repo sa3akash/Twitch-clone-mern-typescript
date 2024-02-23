@@ -1,5 +1,6 @@
-import { joiValidation } from "@/services/decorators/joiDecorator";
+import { joiValidation,joiParamsValidation } from "@/services/decorators/joiDecorator";
 
 export {
-    joiValidation
+    joiValidation,
+    joiParamsValidation
 }

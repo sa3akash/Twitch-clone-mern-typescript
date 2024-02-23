@@ -5,15 +5,21 @@ interface IUserSchema extends mongoose.Document {
   name: string;
   email: string;
   password: string;
-  comparePassword(password: string): Promise<boolean>;
-  hashPassword(password: string): Promise<string>;
+  comparePassword(password: string): boolean;
+  hashPassword(password: string): string;
+  channel: mongoose.Types.ObjectId;
+  followedChannel:[mongoose.Types.ObjectId];
 }
 
 const UserSchema = new mongoose.Schema(
   {
     name: { type: String },
-    email: { type: String, unique: true, lowercase:true },
+    email: { type: String, unique: true, lowercase: true },
     password: { type: String },
+    channel: { type: mongoose.Types.ObjectId, ref: "Channel" },
+    followedChannel: {
+      type: [{ type: mongoose.Types.ObjectId, ref: "Channel" }],
+    },
   },
   {
     timestamps: true,

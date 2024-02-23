@@ -1,4 +1,5 @@
 import { errorHandler } from "@/middlewares/globalErrorHandler";
+import { Channel } from "@/model/Channel";
 import { User } from "@/model/User";
 import { joiValidation } from "@/services/decorators";
 import { LoginJoiSchema, registerJoiSchema } from "@/services/joiValidation";
@@ -15,10 +16,13 @@ export class AuthController {
       return next(errorHandler.createError(409, "User already exists."));
     }
 
+    const channel = await Channel.create({});
+
     const user = await User.create({
       name,
       email,
       password,
+      channel:channel._id
     });
 
     const token: string = jwtUtils.createJwt({
@@ -47,7 +51,7 @@ export class AuthController {
     const { email, password } = req.body;
 
     const user = await User.findOne({ email });
-    if (!user || !(await user.comparePassword(password))) {
+    if (!user || !user.comparePassword(password)) {
       return next(errorHandler.createError(403, "Invalid creadentials"));
     }
 
