@@ -16,7 +16,7 @@ const Login: React.FC<Props> = ({ setIsLogin }) => {
     email: "",
   });
 
-  const setUser = useAuth((state)=>state.setUser);
+  const setUser = useAuth((state) => state.setUser);
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -34,7 +34,7 @@ const Login: React.FC<Props> = ({ setIsLogin }) => {
     api
       .login(data)
       .then(({ data }) => {
-        setUser(data?.data)
+        setUser(data?.data);
         setSuccess(data.message);
         setTimeout(() => {
           setSuccess("");
@@ -51,6 +51,7 @@ const Login: React.FC<Props> = ({ setIsLogin }) => {
         setLoading(false);
       });
   };
+
   return (
     <section className="bg-gray-50 dark:bg-gray-900 w-screen h-screen">
       <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">

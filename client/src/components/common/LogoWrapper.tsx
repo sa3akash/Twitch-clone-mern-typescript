@@ -1,8 +1,9 @@
+import { Link } from "react-router-dom"
 import Logo from "../../assets/image/logo.png"
 
 const LogoWrapper = () => {
   return (
-    <div
+    <Link to="/"
         className="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white"
       >
         <img
@@ -11,7 +12,7 @@ const LogoWrapper = () => {
           alt="logo"
         />
         Twitch Clone
-      </div>
+      </Link>
   )
 }
 

@@ -2,15 +2,19 @@ import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
 
 type UserType = {
-  _id: string;
-  name: string;
+  id: string;
   email: string;
-  token: string;
+  name: string;
+  channelId: string;
+  title: string;
+  desc: string;
+  avaterUrl: string;
+  streamKey: string;
 };
 
 interface IAuthData {
   user: UserType | null;
-  setUser: (agr: UserType) => void;
+  setUser: (agr: UserType | null) => void;
 }
 
 export const useAuth = create(
