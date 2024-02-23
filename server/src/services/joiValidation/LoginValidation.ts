@@ -16,4 +16,23 @@ const LoginJoiSchema: ObjectSchema = Joi.object().keys({
   }),
 });
 
-export { LoginJoiSchema };
+
+const updatePassword: ObjectSchema = Joi.object().keys({
+  oldPassword: Joi.string().required().min(6).max(30).messages({
+    "string.base": "Old password must be of type string.",
+    "string.min": "Invalid Old password.",
+    "string.max": "Invalid Old password.",
+    "string.empty": "Old password is a required field.",
+    "any.required": "Old password is a required field.",
+  }),
+  newPassword: Joi.string().required().min(6).max(30).messages({
+    "string.base": "New password must be of type string.",
+    "string.min": "Invalid New password.",
+    "string.max": "Invalid New password.",
+    "string.empty": "New password is a required field.",
+    "any.required": "New password is a required field.",
+  }),
+
+});
+
+export { LoginJoiSchema,updatePassword };

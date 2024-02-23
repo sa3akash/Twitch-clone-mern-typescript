@@ -1,5 +1,17 @@
-import { LoginJoiSchema } from "@/services/joiValidation/LoginValidation";
+import {
+  LoginJoiSchema,
+  updatePassword,
+} from "@/services/joiValidation/LoginValidation";
 import { registerJoiSchema } from "@/services/joiValidation/RegisterValidation";
+import {
+  ChannelIdSchema,
+  updateSettins,
+} from "@/services/joiValidation/ChannelValidation";
 
-
-export { LoginJoiSchema, registerJoiSchema };
+export {
+  LoginJoiSchema,
+  registerJoiSchema,
+  ChannelIdSchema,
+  updateSettins,
+  updatePassword,
+};

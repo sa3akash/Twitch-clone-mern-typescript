@@ -1,7 +1,7 @@
 import { config } from "@/config";
 import jwt from "jsonwebtoken";
 
-interface IPaylowd {
+export interface IPaylowd {
   id: string;
   name: string;
   email: string;
@@ -14,8 +14,8 @@ class Jwt {
     });
   }
 
-  public verifyJwt(token: string) {
-    return jwt.verify(token, config.JWT_SECRET!);
+  public verifyJwt(token: string,fn:(err:jwt.VerifyErrors | null,user:string | jwt.JwtPayload | undefined)=>void) {
+    return jwt.verify(token, config.JWT_SECRET!,fn);
   }
 }
 
