@@ -2,10 +2,14 @@ import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
 
 type UserType = {
-  _id: string;
-  name: string;
+  id: string;
   email: string;
-  token: string;
+  name: string;
+  channelId: string;
+  title: string;
+  desc: string;
+  avaterUrl: string;
+  streamKey: string;
 };
 
 interface IAuthData {

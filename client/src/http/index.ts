@@ -1,5 +1,5 @@
 import axios, { AxiosInstance } from "axios";
-import { ILogin, IRegister } from "../interfaces";
+import { ILogin, IRegister, IUpdateInfo } from "../interfaces";
 
 class Api {
   private apiCall: AxiosInstance;
@@ -24,7 +24,7 @@ class Api {
           this.isRetry = true;
           localStorage.clear();
           sessionStorage.clear();
-          window.location.replace('/login');
+          window.location.replace('/auth');
         }
         throw error;
       },
@@ -38,6 +38,17 @@ class Api {
   
   public register(data: IRegister) {
     return this.apiCall.post("/register", data,);
+  }
+
+  public changeStreamKey() {
+    return this.apiCall.put("/channel/update-stream-key", {});
+  }
+
+  public updatePassword(data:{oldPassword:string,newPassword:string}) {
+    return this.apiCall.put("/user/update-password", data);
+  }
+  public updateInfo(data:IUpdateInfo) {
+    return this.apiCall.put("/channel", data);
   }
 }
 

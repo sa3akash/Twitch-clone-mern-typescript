@@ -41,7 +41,12 @@ export class AuthController {
         id: user._id,
         email: user.email,
         name: user.name,
-        token,
+        channelId: channel._id,
+        title:channel.title,
+        desc:channel.desc,
+        avaterUrl:channel.avaterUrl,
+        streamKey: channel.streamKey
+
       },
     });
   }
@@ -50,7 +55,7 @@ export class AuthController {
   public async login(req: Request, res: Response, next: NextFunction) {
     const { email, password } = req.body;
 
-    const user = await User.findOne({ email });
+    const user:any = await User.findOne({ email }).populate("channel");
     if (!user || !user.comparePassword(password)) {
       return next(errorHandler.createError(403, "Invalid creadentials"));
     }
@@ -71,7 +76,11 @@ export class AuthController {
         id: user._id,
         email: user.email,
         name: user.name,
-        token,
+        channelId: user.channel._id,
+        title:user.channel.title,
+        desc:user.channel.desc,
+        avaterUrl:user.channel.avaterUrl,
+        streamKey: user.channel.streamKey
       },
     });
   }

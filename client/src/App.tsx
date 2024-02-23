@@ -4,6 +4,7 @@ import AuthSkeleton from "./components/skeleton/AuthSkeleton";
 import DashboardSkeleton from "./components/skeleton/DashboardSkeleton";
 import Channels from "./components/Channels";
 import { Protected, SemiProtected } from "./Protected";
+import Settings from "./pages/Settings";
 
 const Auth = lazy(() => import("./pages/Auth"));
 const Dashboard = lazy(() => import("./pages/Dashboard"));
@@ -13,9 +14,7 @@ const router = createBrowserRouter([
     path: "/",
     element: (
       <Suspense fallback={<DashboardSkeleton />}>
-        <Protected>
-          <Dashboard />
-        </Protected>
+        <Dashboard />
       </Suspense>
     ),
     children: [
@@ -25,11 +24,11 @@ const router = createBrowserRouter([
       },
       {
         path: "settings",
-        element: <div>settings</div>,
-      },
-      {
-        path: "channel",
-        element: <div>channel</div>,
+        element: (
+          <Protected>
+            <Settings />
+          </Protected>
+        ),
       },
       {
         path: "channel/:id",
