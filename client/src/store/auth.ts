@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
 
-type UserType = {
+export type UserType = {
   id: string;
   email: string;
   name: string;
@@ -10,6 +10,7 @@ type UserType = {
   desc: string;
   avaterUrl: string;
   streamKey: string;
+  followedChannel: string[];
 };
 
 interface IAuthData {

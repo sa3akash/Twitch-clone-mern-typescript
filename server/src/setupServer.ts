@@ -11,6 +11,8 @@ import Logger from "bunyan";
 import { errorHandler } from "@/middlewares/globalErrorHandler";
 import "express-async-errors";
 import routes from "@/routes";
+import { Server, Socket } from "socket.io";
+import { SocketService } from "./socket";
 
 export class SetupServer {
   private app: Application;
@@ -76,5 +78,19 @@ export class SetupServer {
         `STARTING SERVER ON PORT ${config.PORT} PROCESS ID =${process.pid}`
       );
     });
+  }
+  private socketServer(server:http.Server): void {
+    
+    const io: Server = new Server(server, {
+      path: '/socket.io',
+      cors: {
+        // origin: ['*'],
+        methods: ['GET', 'POST', 'PUT', 'DELETE'],
+        credentials: true
+      }});
+    
+      const socketService = new SocketService(io);
+      socketService.listen()
+    
   }
 }

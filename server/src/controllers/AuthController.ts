@@ -45,8 +45,8 @@ export class AuthController {
         title:channel.title,
         desc:channel.desc,
         avaterUrl:channel.avaterUrl,
-        streamKey: channel.streamKey
-
+        streamKey: channel.streamKey,
+        followedChannel: user.followedChannel
       },
     });
   }
@@ -80,7 +80,8 @@ export class AuthController {
         title:user.channel.title,
         desc:user.channel.desc,
         avaterUrl:user.channel.avaterUrl,
-        streamKey: user.channel.streamKey
+        streamKey: user.channel.streamKey,
+        followedChannel: user.followedChannel
       },
     });
   }

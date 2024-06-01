@@ -2,6 +2,7 @@ import { errorHandler } from "@/middlewares/globalErrorHandler";
 import { Channel } from "@/model/Channel";
 import { User } from "@/model/User";
 import { v4 as uuid } from "uuid";
+import axios from "axios";
 
 import {
   joiParamsValidation,
@@ -21,6 +22,7 @@ export class ChannelController {
     const { channelId } = req.params;
 
     const channel = await Channel.findById(channelId);
+
     if (!channel || !channel.isActive)
       return next(errorHandler.createError(404, "Channel not found."));
 
@@ -29,14 +31,33 @@ export class ChannelController {
       { _id: 1, name: 1, email: 1 }
     );
 
+    const { data: activeStreams } = await axios.get(
+      "http://localhost:8000/api/streams"
+    );
+
+    const allOnlineStream: string[] = [];
+    for (const streamId in activeStreams.live) {
+      if (activeStreams.live[streamId].publisher) {
+        allOnlineStream.push(streamId);
+      }
+    }
+
+    // pulic = activeStreams.live[streamId].subscribers?.length;
+
+    const isOnline = allOnlineStream.includes(channel.streamKey);
+    const onlineViewer = isOnline
+      ? activeStreams.live[channel.streamKey].subscribers?.length
+      : 0;
+
     res.status(200).json({
       _id: channel._id,
       title: channel.title,
       desc: channel.desc,
       name: user?.name,
       email: user?.email,
-      isOnline: channel.isActive,
-      streamUrl: "http",
+      isOnline: isOnline,
+      onlineViewer: onlineViewer,
+      streamUrl: `http://localhost:8000/live/${channel.streamKey}.flv`, // https or ws
     });
   }
 
@@ -50,7 +71,8 @@ export class ChannelController {
           desc: u.channel.desc,
           name: u.name,
           email: u.email,
-          isOnline: u.channel.isActive,
+          avaterUrl: u.channel.avaterUrl,
+          isOnline: false,
         };
       });
 
@@ -71,7 +93,7 @@ export class ChannelController {
       avaterUrl,
       desc,
       title,
-      isActive: true,
+      isActive: avaterUrl ? true : false,
     });
 
     res.status(200).json({
@@ -80,7 +102,6 @@ export class ChannelController {
       title,
       desc,
       avaterUrl,
-      isActive: true,
     });
   }
 

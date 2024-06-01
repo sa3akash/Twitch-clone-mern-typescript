@@ -14,3 +14,22 @@ export interface IUpdateInfo {
   desc: string;
   avaterUrl: string;
 }
+export interface IChannels {
+  _id: string;
+  name: string;
+  isOnline: boolean;
+  title: string;
+  desc: string;
+  avaterUrl: string;
+}
+export interface ISingleChannel {
+  _id: string;
+  name: string;
+  isOnline: boolean;
+  title: string;
+  desc: string;
+  email: string;
+  streamUrl: string;
+  onlineViewer: string;
+}
+

@@ -5,6 +5,7 @@ import DashboardSkeleton from "./components/skeleton/DashboardSkeleton";
 import Channels from "./components/Channels";
 import { Protected, SemiProtected } from "./Protected";
 import Settings from "./pages/Settings";
+import SingleChannel from "./components/SingleChannel";
 
 const Auth = lazy(() => import("./pages/Auth"));
 const Dashboard = lazy(() => import("./pages/Dashboard"));
@@ -32,7 +33,7 @@ const router = createBrowserRouter([
       },
       {
         path: "channel/:id",
-        element: <div>single channel</div>,
+        element: (<SingleChannel/>),
       },
     ],
   },
@@ -49,6 +50,8 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
+
+
   return (
     <>
       <RouterProvider router={router} />

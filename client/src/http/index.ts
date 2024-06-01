@@ -3,7 +3,7 @@ import { ILogin, IRegister, IUpdateInfo } from "../interfaces";
 
 class Api {
   private apiCall: AxiosInstance;
-  private isRetry:boolean = false;
+  private isRetry: boolean = false;
 
   constructor() {
     this.apiCall = axios.create({
@@ -24,31 +24,42 @@ class Api {
           this.isRetry = true;
           localStorage.clear();
           sessionStorage.clear();
-          window.location.replace('/auth');
+          window.location.replace("/auth");
         }
         throw error;
-      },
+      }
     );
-
   }
 
   public login(data: ILogin) {
     return this.apiCall.post("/login", data);
   }
-  
+
   public register(data: IRegister) {
-    return this.apiCall.post("/register", data,);
+    return this.apiCall.post("/register", data);
   }
 
   public changeStreamKey() {
     return this.apiCall.put("/channel/update-stream-key", {});
   }
 
-  public updatePassword(data:{oldPassword:string,newPassword:string}) {
+  public updatePassword(data: { oldPassword: string; newPassword: string }) {
     return this.apiCall.put("/user/update-password", data);
   }
-  public updateInfo(data:IUpdateInfo) {
+
+  public updateInfo(data: IUpdateInfo) {
     return this.apiCall.put("/channel", data);
+  }
+
+  public getAllChannel() {
+    return this.apiCall.get("/channels");
+  }
+
+  public getChannelById(id: string) {
+    return this.apiCall.get(`/channel/${id}`);
+  }
+  public followChannel(id: string) {
+    return this.apiCall.post("channel/follow",{channelId:id});
   }
 }
 
