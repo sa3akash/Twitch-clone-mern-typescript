@@ -21,12 +21,6 @@ class Config {
     return bunyan.createLogger({
       name: name,
       level: "debug",
-      // streams: [
-      //   {
-      //     level: "error",
-      //     stream: new BunyanMongooseStream(),
-      //   },
-      // ],
     });
   }
 }

@@ -11,8 +11,7 @@ const VideoPlayer: FC<Props> = ({ url, autoPlay = true, muted = false }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    let flvPlayer: any;
+    let flvPlayer: flv.Player;
 
     if (videoRef.current) {
       flvPlayer = flv.createPlayer({
